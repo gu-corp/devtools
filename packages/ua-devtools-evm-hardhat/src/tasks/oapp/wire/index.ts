@@ -9,6 +9,7 @@ import {
     createGnosisSignerFactory,
     createSignerFactory,
     formatOmniTransaction,
+    createAwsKmsSignerFactory,
 } from '@layerzerolabs/devtools-evm-hardhat'
 import { OmniTransaction } from '@layerzerolabs/devtools'
 import { printLogo, printRecords } from '@layerzerolabs/io-devtools/swag'
@@ -28,6 +29,7 @@ interface TaskArgs {
     dryRun?: boolean
     assert?: boolean
     safe?: boolean
+    useKms?: boolean
     signer?: SignerDefinition
     /**
      * Name of a custom config loading subtask
@@ -59,6 +61,7 @@ const action: ActionType<TaskArgs> = async (
         dryRun = false,
         assert = false,
         safe = false,
+        useKms = false,
         signer,
         loadConfigSubtask = SUBTASK_LZ_OAPP_CONFIG_LOAD,
         configureSubtask = SUBTASK_LZ_OAPP_WIRE_CONFIGURE,
@@ -141,7 +144,11 @@ const action: ActionType<TaskArgs> = async (
     logger.debug(
         signer == null ? `Creating a default signer` : `Creating a signer based on definition: ${printJson(signer)}`
     )
-    const createSigner = safe ? createGnosisSignerFactory(signer) : createSignerFactory(signer)
+    const createSigner = safe
+        ? createGnosisSignerFactory(signer)
+        : useKms
+          ? createAwsKmsSignerFactory(signer)
+          : createSignerFactory(signer)
 
     // Now sign & send the transactions
     logger.debug(`Using ${signAndSendSubtask} subtask to sign & send the transactions`)
@@ -191,4 +198,5 @@ task(TASK_LZ_OAPP_WIRE, 'Wire LayerZero OApp', action)
         'Will not execute any transactions and fail if there are any transactions required to configure the OApp'
     )
     .addFlag('safe', 'Use gnosis safe to sign transactions')
+    .addFlag('useKms', 'Use AWS KMS to sign transactions')
     .addParam('signer', 'Index or address of signer', undefined, types.signer, true)

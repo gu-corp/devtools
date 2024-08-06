@@ -2,6 +2,7 @@ import 'hardhat/types/config'
 import { EndpointId } from '@layerzerolabs/lz-definitions'
 import { ConnectSafeConfigWithSafeAddress } from '@safe-global/protocol-kit'
 import { SimulationUserConfig } from '@/simulation/types'
+import { EthersV5AwsKmsSignerConfig } from '@gu-corp/ethers-v5-aws-kms-signer/dist/src/aws-kms-signer-v5'
 
 /**
  * Packages containing external artifacts can be specified either
@@ -28,11 +29,13 @@ declare module 'hardhat/types/config' {
     interface HardhatNetworkUserConfig {
         eid?: never
         safeConfig?: never
+        awsKmsConfig?: never
     }
 
     interface HardhatNetworkConfig {
         eid?: never
         safeConfig?: never
+        awsKmsConfig?: never
     }
 
     interface HttpNetworkUserConfig {
@@ -62,6 +65,7 @@ declare module 'hardhat/types/config' {
          * Optional gnosis safe config.
          */
         safeConfig?: SafeConfig
+        awsKmsConfig?: EthersV5AwsKmsSignerConfig
     }
 
     interface HttpNetworkConfig {
@@ -91,6 +95,7 @@ declare module 'hardhat/types/config' {
          * Optional gnosis safe config.
          */
         safeConfig?: SafeConfig
+        awsKmsConfig?: EthersV5AwsKmsSignerConfig
     }
     interface SafeConfig extends ConnectSafeConfigWithSafeAddress {
         safeUrl: string // Note:  This is the URL of the Safe API, not the safe itself
