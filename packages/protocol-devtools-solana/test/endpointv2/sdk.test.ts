@@ -1,9 +1,10 @@
 import { Connection, PublicKey } from '@solana/web3.js'
-import { ConnectionFactory, createConnectionFactory, defaultRpcUrlFactory } from '@layerzerolabs/devtools-solana'
+import { ConnectionFactory, createConnectionFactory, createRpcUrlFactory } from '@layerzerolabs/devtools-solana'
 import { EndpointId } from '@layerzerolabs/lz-definitions'
 import { EndpointV2 } from '@/endpointv2'
 import { formatEid, normalizePeer } from '@layerzerolabs/devtools'
 import { EndpointProgram } from '@layerzerolabs/lz-solana-sdk-v2'
+import { Uln302SetUlnConfig } from '@layerzerolabs/protocol-devtools'
 
 describe('endpointv2/sdk', () => {
     // FIXME These tests are using a mainnet OFT deployment and are potentially very fragile
@@ -21,7 +22,12 @@ describe('endpointv2/sdk', () => {
     let getLatestBlockhashMock: jest.SpyInstance
 
     beforeAll(() => {
-        connectionFactory = createConnectionFactory(defaultRpcUrlFactory)
+        connectionFactory = createConnectionFactory(
+            createRpcUrlFactory({
+                [EndpointId.SOLANA_V2_MAINNET]: process.env.RPC_URL_SOLANA_MAINNET,
+                [EndpointId.SOLANA_V2_TESTNET]: process.env.RPC_URL_SOLANA_TESTNET,
+            })
+        )
     })
 
     beforeEach(() => {
@@ -45,8 +51,6 @@ describe('endpointv2/sdk', () => {
         })
 
         it('should return a Solana address if we are asking for a library that has been set', async () => {
-            const connectionFactory = createConnectionFactory(defaultRpcUrlFactory)
-
             const connection = await connectionFactory(EndpointId.SOLANA_V2_MAINNET)
             const sdk = new EndpointV2(connection, point, account)
 
@@ -73,7 +77,7 @@ describe('endpointv2/sdk', () => {
             expect(lib).toEqual<string>(expect.any(String))
             expect(normalizePeer(lib, eid)).toEqual(expect.any(Uint8Array))
 
-            expect(await sdk.isDefaultSendLibrary(lib!, eid)).toBeTruthy()
+            expect(await sdk.isDefaultSendLibrary(lib!, eid)).toBeFalsy()
             expect(await sdk.isDefaultSendLibrary(EndpointProgram.PROGRAM_ID.toBase58(), eid)).toBeFalsy()
         })
     })
@@ -83,7 +87,7 @@ describe('endpointv2/sdk', () => {
             const connection = await connectionFactory(EndpointId.SOLANA_V2_MAINNET)
             const sdk = new EndpointV2(connection, point, account)
 
-            expect(await sdk.isDefaultSendLibrary(oftConfig.toBase58(), EndpointId.FLARE_V2_MAINNET)).toBeTruthy()
+            expect(await sdk.isDefaultSendLibrary(oftConfig.toBase58(), EndpointId.FLARE_V2_MAINNET)).toBeFalsy()
         })
 
         it('should return false if the default send library is not being used', async () => {
@@ -101,7 +105,7 @@ describe('endpointv2/sdk', () => {
 
             expect(await sdk.getReceiveLibrary(account.toBase58(), EndpointId.ETHEREUM_V2_TESTNET)).toEqual([
                 undefined,
-                true,
+                false,
             ])
         })
 
@@ -350,7 +354,78 @@ describe('endpointv2/sdk', () => {
                 },
             ])
 
-            await sdk.setConfig(oftConfig.toBase58(), sendUln!, params)
+            const transactions = await sdk.setConfig(oftConfig.toBase58(), sendUln!, params)
+            expect(transactions).toHaveLength(1)
+        })
+
+        it('should create multiple OmniTransactions when called with a lot of uln configs', async () => {
+            getLatestBlockhashMock.mockRestore()
+
+            const connection = await connectionFactory(EndpointId.SOLANA_V2_MAINNET)
+            const sdk = new EndpointV2(connection, point, account)
+
+            const eid = EndpointId.ETHEREUM_V2_MAINNET
+
+            const sendUln = await sdk.getSendLibrary(oftConfig.toBase58(), eid)
+            expect(sendUln).not.toBeUndefined()
+
+            const sendConfigParam: Uln302SetUlnConfig = {
+                type: 'send',
+                eid: EndpointId.ETHEREUM_V2_MAINNET,
+                ulnConfig: {
+                    confirmations: BigInt(32),
+                    optionalDVNThreshold: 0,
+                    requiredDVNs: [
+                        '4VDjp6XQaxoZf5RGwiPU9NR1EXSZn2TP4ATMmiSzLfhb',
+                        'GPjyWr8vCotGuFubDpTxDxy9Vj1ZeEN4F2dwRmFiaGab',
+                    ],
+                    optionalDVNs: [],
+                },
+            }
+
+            const receiveConfigParam: Uln302SetUlnConfig = {
+                type: 'receive',
+                eid: EndpointId.ETHEREUM_V2_MAINNET,
+                ulnConfig: {
+                    confirmations: BigInt(32),
+                    optionalDVNThreshold: 0,
+                    requiredDVNs: [
+                        '4VDjp6XQaxoZf5RGwiPU9NR1EXSZn2TP4ATMmiSzLfhb',
+                        'GPjyWr8vCotGuFubDpTxDxy9Vj1ZeEN4F2dwRmFiaGab',
+                    ],
+                    optionalDVNs: [],
+                },
+            }
+
+            const params = await sdk.getUlnConfigParams(sendUln!, [
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                sendConfigParam,
+                sendConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                sendConfigParam,
+                sendConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+                sendConfigParam,
+                receiveConfigParam,
+            ])
+
+            const transactions = await sdk.setConfig(oftConfig.toBase58(), sendUln!, params)
+
+            expect(transactions.length).toBe(8)
+            expect(transactions.map(({ description, point }) => ({ description, point }))).toMatchSnapshot()
         })
     })
 })

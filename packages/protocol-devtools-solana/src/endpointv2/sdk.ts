@@ -1,8 +1,8 @@
 import { MessagingFee } from '@layerzerolabs/protocol-devtools'
 import type {
     IEndpointV2,
-    IUln302,
     SetConfigParam,
+    Uln302ConfigType,
     Uln302ExecutorConfig,
     Uln302SetUlnConfig,
     Uln302UlnConfig,
@@ -15,13 +15,21 @@ import {
     AsyncRetriable,
     OmniPoint,
     mapError,
+    areBytes32Equal,
+    normalizePeer,
 } from '@layerzerolabs/devtools'
 import type { EndpointId } from '@layerzerolabs/lz-definitions'
-import { OmniSDK } from '@layerzerolabs/devtools-solana'
+import { canAddInstruction, OmniSDK } from '@layerzerolabs/devtools-solana'
 import { Timeout } from '@layerzerolabs/protocol-devtools'
 import { Uln302SetExecutorConfig } from '@layerzerolabs/protocol-devtools'
 import { Logger, printJson } from '@layerzerolabs/io-devtools'
-import { EndpointProgram, SetConfigType } from '@layerzerolabs/lz-solana-sdk-v2'
+import {
+    EndpointPDADeriver,
+    EndpointProgram,
+    SetConfigType,
+    SimpleMessageLibProgram,
+    UlnProgram,
+} from '@layerzerolabs/lz-solana-sdk-v2'
 import { Connection, PublicKey, Transaction } from '@solana/web3.js'
 import assert from 'assert'
 import { Uln302 } from '@/uln302'
@@ -35,26 +43,42 @@ import { SetConfigSchema } from './schema'
 export class EndpointV2 extends OmniSDK implements IEndpointV2 {
     public readonly program: EndpointProgram.Endpoint
 
+    public readonly deriver: EndpointPDADeriver
+
     constructor(connection: Connection, point: OmniPoint, userAccount: PublicKey, logger?: Logger) {
         super(connection, point, userAccount, logger)
 
         this.program = new EndpointProgram.Endpoint(this.publicKey)
+        this.deriver = new EndpointPDADeriver(this.publicKey)
     }
 
     @AsyncRetriable()
     async getDelegate(oapp: OmniAddress): Promise<OmniAddress | undefined> {
         this.logger.debug(`Getting delegate for ${oapp}`)
 
-        throw new TypeError(`getDelegate() not implemented on Solana Endpoint SDK`)
+        try {
+            const [oAppRegistry] = this.deriver.oappRegistry(new PublicKey(oapp))
+            const oAppRegistryInfo = await EndpointProgram.accounts.OAppRegistry.fromAccountAddress(
+                this.connection,
+                oAppRegistry
+            )
+
+            return oAppRegistryInfo.delegate.toBase58()
+        } catch (error) {
+            throw new Error(`Failed to get delegate for ${this.label} for oapp ${oapp}: ${error}`)
+        }
     }
 
     async isDelegate(oapp: OmniAddress, delegate: OmniAddress): Promise<boolean> {
         this.logger.debug(`Checking whether ${delegate} is a delegate for OApp ${oapp}`)
 
-        throw new TypeError(`isDelegate() not implemented on Solana Endpoint SDK`)
+        return areBytes32Equal(
+            normalizePeer(delegate, this.point.eid),
+            normalizePeer(await this.getDelegate(oapp), this.point.eid)
+        )
     }
 
-    async getUln302SDK(address: OmniAddress): Promise<IUln302> {
+    async getUln302SDK(address: OmniAddress): Promise<Uln302> {
         this.logger.debug(`Getting Uln302 SDK for address ${address}`)
 
         return new Uln302(this.connection, { eid: this.point.eid, address }, this.userAccount)
@@ -72,7 +96,10 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
                 new Error(`Failed to get the default receive library for ${this.label} for ${eidLabel}: ${error}`)
         )
 
-        return config?.msgLib.toBase58() ?? undefined
+        const lib = config?.owner?.toBase58() ?? undefined
+        this.logger.debug(`Got default receive library for eid ${eid} (${eidLabel}): ${lib}`)
+
+        return lib
     }
 
     @AsyncRetriable()
@@ -109,7 +136,13 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
                 )
         )
 
-        return [config?.programId?.toBase58() ?? undefined, config?.isDefault ?? true]
+        const lib = config?.programId?.toBase58() ?? undefined
+        const isDefault = config?.isDefault ?? false
+        this.logger.debug(
+            `Got receive library for eid ${srcEid} (${eidLabel}) and address ${receiver}: ${lib} (${isDefault ? 'default' : 'not default'})`
+        )
+
+        return [lib, isDefault]
     }
 
     async setDefaultReceiveLibrary(
@@ -135,24 +168,32 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
             (error) => new Error(`Failed to get the default send library for ${this.label} for ${eidLabel}: ${error}`)
         )
 
-        return config?.msgLib.toBase58() ?? undefined
+        const lib = config?.owner?.toBase58() ?? undefined
+        this.logger.debug(`Got default receive library for eid ${eid} (${eidLabel}): ${lib}`)
+
+        return lib
     }
 
     @AsyncRetriable()
     async isDefaultSendLibrary(sender: OmniAddress, dstEid: EndpointId): Promise<boolean> {
-        this.logger.debug(
-            `Checking default send library for eid ${dstEid} (${formatEid(dstEid)}) and address ${sender}`
-        )
+        const eidLabel = formatEid(dstEid)
+
+        this.logger.debug(`Checking default send library for eid ${dstEid} (${eidLabel}) and address ${sender}`)
 
         const config = await mapError(
             () => this.program.getSendLibrary(this.connection, new PublicKey(sender), dstEid),
             (error) =>
                 new Error(
-                    `Failed to check the default send library for ${this.label} for ${sender} for ${formatEid(dstEid)}: ${error}`
+                    `Failed to check the default send library for ${this.label} for ${sender} for ${eidLabel}: ${error}`
                 )
         )
 
-        return config?.isDefault ?? true
+        const isDefault = config?.isDefault ?? false
+        this.logger.debug(
+            `Checked default send library for eid ${dstEid} (${eidLabel}) and address ${sender}: ${isDefault}`
+        )
+
+        return isDefault
     }
 
     async setDefaultSendLibrary(eid: EndpointId, uln: OmniAddress | null | undefined): Promise<OmniTransaction> {
@@ -259,10 +300,23 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
         throw new TypeError(`setReceiveLibraryTimeout() not implemented on Solana Endpoint SDK`)
     }
 
-    async setConfig(oapp: OmniAddress, uln: OmniAddress, setConfigParams: SetConfigParam[]): Promise<OmniTransaction> {
+    async setConfig(
+        oapp: OmniAddress,
+        uln: OmniAddress,
+        setConfigParams: SetConfigParam[]
+    ): Promise<OmniTransaction[]> {
         this.logger.debug(`Setting config for OApp ${oapp} to ULN ${uln} with config ${printJson(setConfigParams)}`)
 
-        const transaction = new Transaction()
+        // We'll use this to hold the transaction that receives any new instructions
+        //
+        // If the size of this transaction is about to overflow, we serialize it
+        // and reset this variable to a new transaction
+        let transaction = new Transaction()
+
+        // For logging purposes we'll keep track of the set config params that we pushed into the current transaction
+        let setConfigParamsInTransaction: SetConfigParam[] = []
+
+        const omniTransactions: OmniTransaction[] = []
 
         for (const setConfigParam of setConfigParams) {
             try {
@@ -282,23 +336,43 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
                     }
                 )
 
-                transaction.add(instruction)
+                // We now need to check whether we can add any new instructions to the current transaction
+                if (canAddInstruction(transaction, instruction)) {
+                    // If we can then we will
+                    transaction.add(instruction)
+                    setConfigParamsInTransaction.push(setConfigParam)
+                } else {
+                    // If we can't, we serialize the transaction as it is
+                    omniTransactions.push({
+                        ...(await this.createTransaction(transaction)),
+                        description: `Setting config for ULN ${uln} to ${printJson(setConfigParamsInTransaction)}`,
+                    })
+
+                    // And we'll push the instruction to a new transaction
+                    transaction = new Transaction().add(instruction)
+                    setConfigParamsInTransaction = [setConfigParam]
+                }
             } catch (error) {
                 throw new Error(`Failed to setConfig for ${this.label} and OApp ${oapp} and ULN ${uln}: ${error}`)
             }
         }
 
-        return {
-            ...(await this.createTransaction(transaction)),
-            description: `Setting config for ULN ${uln} to ${printJson(setConfigParams)}`,
+        // If we have any leftover instructions to send, we'll add them to the resulting array
+        if (transaction.instructions.length > 0) {
+            omniTransactions.push({
+                ...(await this.createTransaction(transaction)),
+                description: `Setting config for ULN ${uln} to ${printJson(setConfigParamsInTransaction)}`,
+            })
         }
+
+        return omniTransactions
     }
 
     async setUlnConfig(
         oapp: OmniAddress,
         uln: OmniAddress,
         setUlnConfig: Uln302SetUlnConfig[]
-    ): Promise<OmniTransaction> {
+    ): Promise<OmniTransaction[]> {
         this.logger.debug(`Setting ULN config for OApp ${oapp} to ULN ${uln} with config ${printJson(setUlnConfig)}`)
 
         throw new TypeError(`setConfig() not implemented on Solana Endpoint SDK`)
@@ -308,7 +382,7 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
         oapp: OmniAddress,
         uln: OmniAddress,
         setExecutorConfig: Uln302SetExecutorConfig[]
-    ): Promise<OmniTransaction> {
+    ): Promise<OmniTransaction[]> {
         this.logger.debug(
             `Setting executor config for OApp ${oapp} to ULN ${uln} with config ${printJson(setExecutorConfig)}`
         )
@@ -351,8 +425,15 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
     /**
      * @see {@link IUln302.getUlnConfig}
      */
-    async getUlnConfig(oapp: OmniAddress, uln: OmniAddress, eid: EndpointId): Promise<Uln302UlnConfig> {
-        this.logger.debug(`Getting ULN config for eid ${eid} (${formatEid(eid)}) and OApp ${oapp} and ULN ${uln}`)
+    async getUlnConfig(
+        oapp: OmniAddress,
+        uln: OmniAddress,
+        eid: EndpointId,
+        type: Uln302ConfigType
+    ): Promise<Uln302UlnConfig> {
+        this.logger.debug(
+            `Getting ULN ${type} config for eid ${eid} (${formatEid(eid)}) and OApp ${oapp} and ULN ${uln}`
+        )
 
         throw new TypeError(`getUlnConfig() not implemented on Solana Endpoint SDK`)
     }
@@ -360,11 +441,18 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
     /**
      * @see {@link IUln302.getAppUlnConfig}
      */
-    async getAppUlnConfig(oapp: OmniAddress, uln: OmniAddress, eid: EndpointId): Promise<Uln302UlnConfig> {
-        this.logger.debug(`Getting App ULN config for eid ${eid} (${formatEid(eid)}) and OApp ${oapp} and ULN ${uln}`)
+    async getAppUlnConfig(
+        oapp: OmniAddress,
+        uln: OmniAddress,
+        eid: EndpointId,
+        type: Uln302ConfigType
+    ): Promise<Uln302UlnConfig> {
+        this.logger.debug(
+            `Getting App ULN ${type} config for eid ${eid} (${formatEid(eid)}) and OApp ${oapp} and ULN ${uln}`
+        )
 
         const ulnSdk = await this.getUln302SDK(uln)
-        return await ulnSdk.getAppUlnConfig(eid, oapp)
+        return await ulnSdk.getAppUlnConfig(eid, oapp, type)
     }
 
     /**
@@ -374,12 +462,15 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
         oapp: OmniAddress,
         uln: OmniAddress,
         eid: EndpointId,
-        config: Uln302UlnUserConfig
+        config: Uln302UlnUserConfig,
+        type: Uln302ConfigType
     ): Promise<boolean> {
-        this.logger.debug(`Checking ULN app config for eid ${eid} (${formatEid(eid)}) and OApp ${oapp} and ULN ${uln}`)
+        this.logger.debug(
+            `Checking App ULN ${type} config for eid ${eid} (${formatEid(eid)}) and OApp ${oapp} and ULN ${uln}`
+        )
 
         const ulnSdk = await this.getUln302SDK(uln)
-        return ulnSdk.hasAppUlnConfig(eid, oapp, config)
+        return ulnSdk.hasAppUlnConfig(eid, oapp, config, type)
     }
 
     @AsyncRetriable()
@@ -397,7 +488,7 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
     }
 
     async getUlnConfigParams(uln: OmniAddress, setUlnConfig: Uln302SetUlnConfig[]): Promise<SetConfigParam[]> {
-        const ulnSdk = (await this.getUln302SDK(uln)) as Uln302
+        const ulnSdk = await this.getUln302SDK(uln)
 
         return setUlnConfig.map(({ eid, ulnConfig, type }) => ({
             eid,
@@ -410,12 +501,135 @@ export class EndpointV2 extends OmniSDK implements IEndpointV2 {
         uln: OmniAddress,
         setExecutorConfig: Uln302SetExecutorConfig[]
     ): Promise<SetConfigParam[]> {
-        const ulnSdk = (await this.getUln302SDK(uln)) as Uln302
+        const ulnSdk = await this.getUln302SDK(uln)
 
         return setExecutorConfig.map(({ eid, executorConfig }) => ({
             eid,
             configType: SetConfigType.EXECUTOR,
             config: ulnSdk.encodeExecutorConfig(executorConfig),
         }))
+    }
+
+    async initializeOAppNonce(oapp: OmniAddress, eid: EndpointId, peer: OmniAddress): Promise<[OmniTransaction] | []> {
+        const eidLabel = formatEid(eid)
+        this.logger.verbose(`Initializing OApp nonce for OApp ${oapp} and peer ${peer} on ${eidLabel}`)
+
+        const instruction = await mapError(
+            () =>
+                this.program.initOAppNonce(
+                    this.connection,
+                    this.userAccount,
+                    eid,
+                    new PublicKey(oapp),
+                    normalizePeer(peer, eid)
+                ),
+            (error) =>
+                new Error(
+                    `Failed to init nonce for ${this.label} for OApp ${oapp} and peer ${peer} on ${eidLabel}: ${error}`
+                )
+        )
+
+        if (instruction == null) {
+            return (
+                this.logger.verbose(
+                    `Nonce initialization not necessary for OApp ${oapp} and peer ${peer} on ${eidLabel}`
+                ),
+                []
+            )
+        }
+
+        return [
+            {
+                ...(await this.createTransaction(new Transaction().add(instruction))),
+                description: `Initializing nonce for OApp ${oapp} and peer ${peer} on ${eidLabel}`,
+            },
+        ]
+    }
+
+    async initializeSendLibrary(oapp: OmniAddress, eid: EndpointId): Promise<[OmniTransaction] | []> {
+        const eidLabel = formatEid(eid)
+        this.logger.verbose(`Initializing OApp send library for OApp ${oapp} on ${eidLabel}`)
+
+        const instruction = await mapError(
+            () => this.program.initSendLibrary(this.connection, this.userAccount, new PublicKey(oapp), eid),
+            (error) =>
+                new Error(`Failed to init send library for ${this.label} for OApp ${oapp} on ${eidLabel}: ${error}`)
+        )
+
+        if (instruction == null) {
+            return this.logger.verbose(`Send library initialization not necessary for OApp ${oapp} on ${eidLabel}`), []
+        }
+
+        return [
+            {
+                ...(await this.createTransaction(new Transaction().add(instruction))),
+                description: `Initializing send library for OApp ${oapp} on ${eidLabel}`,
+            },
+        ]
+    }
+
+    async initializeReceiveLibrary(oapp: OmniAddress, eid: EndpointId): Promise<[OmniTransaction] | []> {
+        const eidLabel = formatEid(eid)
+        this.logger.verbose(`Initializing OApp receive library for OApp ${oapp} on ${eidLabel}`)
+
+        const instruction = await mapError(
+            () => this.program.initReceiveLibrary(this.connection, this.userAccount, new PublicKey(oapp), eid),
+            (error) =>
+                new Error(`Failed to init receive library for ${this.label} for OApp ${oapp} on ${eidLabel}: ${error}`)
+        )
+
+        if (instruction == null) {
+            return (
+                this.logger.verbose(`Receive library initialization not necessary for OApp ${oapp} on ${eidLabel}`), []
+            )
+        }
+
+        return [
+            {
+                ...(await this.createTransaction(new Transaction().add(instruction))),
+                description: `Initializing receive library for OApp ${oapp} on ${eidLabel}`,
+            },
+        ]
+    }
+
+    async initializeOAppConfig(
+        oapp: OmniAddress,
+        eid: EndpointId,
+        lib: OmniAddress = UlnProgram.PROGRAM_ADDRESS
+    ): Promise<[OmniTransaction] | []> {
+        const eidLabel = formatEid(eid)
+        this.logger.verbose(`Initializing OApp config library for OApp ${oapp} on ${eidLabel}`)
+
+        const instruction = await mapError(
+            () => {
+                const libPublicKey = new PublicKey(lib)
+                const msgLibInterface = libPublicKey.equals(SimpleMessageLibProgram.PROGRAM_ID)
+                    ? (this.logger.debug(`Using SimpleMessageLib at ${libPublicKey} to initialize OApp config`),
+                      new SimpleMessageLibProgram.SimpleMessageLib(libPublicKey))
+                    : (this.logger.debug(`Using ULN at ${libPublicKey} to initialize OApp config`),
+                      new UlnProgram.Uln(libPublicKey))
+
+                return this.program.initOappConfig(
+                    this.userAccount,
+                    msgLibInterface,
+                    this.userAccount,
+                    new PublicKey(oapp),
+                    eid
+                )
+            },
+            (error) =>
+                new Error(`Failed to init OApp config for ${this.label} for OApp ${oapp} on ${eidLabel}: ${error}`)
+        )
+
+        if (instruction == null) {
+            return this.logger.verbose(`OApp config initialization not necessary for OApp ${oapp} on ${eidLabel}`), []
+        }
+
+        return [
+            {
+                ...(await this.createTransaction(new Transaction().add(instruction))),
+                description: `Initializing OApp config for OApp ${oapp} on ${eidLabel}`,
+            },
+        ]
     }
 }

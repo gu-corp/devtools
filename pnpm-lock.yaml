@@ -115,7 +115,7 @@ importers:
         specifier: ~0.1.7
         version: link:../../packages/toolbox-foundry
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -187,7 +187,7 @@ importers:
         specifier: ^7.23.9
         version: 7.23.9
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ^0.3.26
+        specifier: ^1.0.0
         version: link:../../packages/devtools-evm-hardhat
       '@layerzerolabs/eslint-config-next':
         specifier: ~2.3.3
@@ -226,7 +226,7 @@ importers:
         specifier: ~0.1.7
         version: link:../../packages/toolbox-foundry
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.40
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -334,7 +334,7 @@ importers:
         specifier: ~0.1.7
         version: link:../../packages/toolbox-foundry
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -442,7 +442,7 @@ importers:
         specifier: ~0.1.7
         version: link:../../packages/toolbox-foundry
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -521,8 +521,8 @@ importers:
         specifier: ~0.3.17
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.31)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(fgjerrlir4idfvbw6gcrbu6zny)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -655,8 +655,8 @@ importers:
         specifier: ~0.3.17
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.31)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(fgjerrlir4idfvbw6gcrbu6zny)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -774,8 +774,8 @@ importers:
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.20
-        version: 0.3.23(ewa2lkeh6ih7vc4cly4ugra4sy)
+        specifier: ~1.0.0
+        version: link:../ua-devtools
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
@@ -859,8 +859,8 @@ importers:
         specifier: ^5.7.2
         version: 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@layerzerolabs/devtools':
-        specifier: ~0.3.20
-        version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.3.23
+        version: link:../devtools
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -950,8 +950,8 @@ importers:
         specifier: ~0.3.19
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(nr3y5kslgedgdr46bw37uyluz4)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -1026,8 +1026,8 @@ importers:
         version: 4.0.4
     devDependencies:
       '@layerzerolabs/devtools':
-        specifier: ~0.3.22
-        version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.3.23
+        version: link:../devtools
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -1048,10 +1048,16 @@ importers:
         version: 1.4.0(@swc/helpers@0.5.12)
       '@swc/jest':
         specifier: ^0.2.36
-        version: 0.2.36(@swc/core@1.4.0(@swc/helpers@0.5.12))
+        version: 0.2.36(@swc/core@1.4.0)
+      '@types/bn.js':
+        specifier: ~5.1.5
+        version: 5.1.5
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
+      bn.js:
+        specifier: ^5.2.0
+        version: 5.2.1
       fast-check:
         specifier: ^3.15.1
         version: 3.15.1
@@ -1218,8 +1224,8 @@ importers:
         specifier: ^0.1.7
         version: 0.1.8
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.40
-        version: 0.2.41(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/constants@5.7.0)(@ethersproject/providers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(@nomicfoundation/hardhat-ethers@3.0.5(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat@2.22.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@18.18.14)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)))(@nomiclabs/hardhat-ethers@2.2.3(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat@2.22.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@18.18.14)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)))(@types/react@17.0.75)(bufferutil@4.0.8)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat-deploy@0.12.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat@2.22.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@18.18.14)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10))(solidity-bytes-utils@0.8.2)(utf-8-validate@5.0.10)
+        specifier: ~0.3.0
+        version: link:../toolbox-hardhat
       '@openzeppelin/contracts':
         specifier: ^5.0.2
         version: 5.0.2
@@ -1270,8 +1276,8 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(react@17.0.2))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(react@17.0.2))(react@17.0.2))(ink@3.2.0(react@17.0.2))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.0
+        version: link:../protocol-devtools
       '@swc/core':
         specifier: ^1.4.0
         version: 1.4.0(@swc/helpers@0.5.12)
@@ -1310,26 +1316,26 @@ importers:
         specifier: ~0.3.17
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(nr3y5kslgedgdr46bw37uyluz4)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/lz-definitions':
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/omnicounter-devtools':
-        specifier: ~0.3.7
-        version: 0.3.7(3aoognsuesbw2q43bmqwbjxequ)
+        specifier: ~1.0.0
+        version: link:../omnicounter-devtools
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.0
+        version: link:../protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
-        version: 0.3.10(2qj6qwoblgbmgufuni7vllx4rm)
+        specifier: ~1.0.0
+        version: link:../protocol-devtools-evm
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.18
-        version: 0.3.23(szycc3hhdkfcnwtiaujkmv2hi4)
+        specifier: ~1.0.0
+        version: link:../ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.14
-        version: 0.3.18(pr2jiua6k7a4dl6zxsmssey5bu)
+        specifier: ~1.0.0
+        version: link:../ua-devtools-evm
       '@swc/core':
         specifier: ^1.4.0
         version: 1.4.0(@swc/helpers@0.5.12)
@@ -1461,8 +1467,8 @@ importers:
         specifier: ~0.3.17
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(nr3y5kslgedgdr46bw37uyluz4)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -1473,8 +1479,8 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.1
+        version: link:../protocol-devtools
       '@layerzerolabs/test-devtools':
         specifier: ~0.2.6
         version: 0.2.7(@layerzerolabs/lz-definitions@2.3.25)(bs58@6.0.0)(fast-check@3.15.1)
@@ -1528,8 +1534,8 @@ importers:
         specifier: ~0.3.21
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-solana':
-        specifier: ~0.0.2
-        version: 0.0.6(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(@solana/web3.js@1.95.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(fp-ts@2.16.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+        specifier: ~0.1.2
+        version: link:../devtools-solana
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -1543,8 +1549,8 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.1
+        version: link:../protocol-devtools
       '@layerzerolabs/test-devtools':
         specifier: ~0.2.6
         version: 0.2.7(@layerzerolabs/lz-definitions@2.3.25)(bs58@6.0.0)(fast-check@3.15.1)
@@ -1552,8 +1558,8 @@ importers:
         specifier: ~0.0.1
         version: 0.0.2(@solana/web3.js@1.95.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(fast-check@3.15.1)
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.22
-        version: 0.3.23(tr6f54haqjhferget7vn5ag3aq)
+        specifier: ~1.0.2
+        version: link:../ua-devtools
       '@solana/web3.js':
         specifier: ~1.95.0
         version: 1.95.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -1769,11 +1775,11 @@ importers:
         specifier: ~0.3.22
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(wcp2p6cuvwiufrnye4oeb6xtc4)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.25
-        version: 0.3.26(gqyhajd4strfjko3oaoutqhjde)
+        specifier: ~1.0.0
+        version: link:../devtools-evm-hardhat
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -1790,23 +1796,23 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(@types/react@17.0.75)(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.1
+        version: link:../protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
-        version: 0.3.10(2ialpo7c5kkzifi2mocxyohcvq)
+        specifier: ~1.0.1
+        version: link:../protocol-devtools-evm
       '@layerzerolabs/test-devtools-evm-hardhat':
         specifier: ~0.2.5
         version: 0.2.5(hardhat@2.22.3(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.4.0(@swc/helpers@0.5.12))(@types/node@18.18.14)(typescript@5.3.3))(typescript@5.3.3)(utf-8-validate@5.0.10))(solidity-bytes-utils@0.8.2)
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.23
-        version: 0.3.23(wlw4k4o3qyj7s5ssetswp2rvla)
+        specifier: ~1.0.2
+        version: link:../ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.18
-        version: 0.3.18(lcr4jr2kuan2k2ywokpefcwxgm)
+        specifier: ~1.0.0
+        version: link:../ua-devtools-evm
       '@layerzerolabs/ua-devtools-evm-hardhat':
-        specifier: ~0.3.19
-        version: 0.3.19(eqji6zlwqcevtgot5gt7ywk6ga)
+        specifier: ~1.0.0
+        version: link:../ua-devtools-evm-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.2
         version: 3.0.5(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat@2.22.3(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.4.0(@swc/helpers@0.5.12))(@types/node@18.18.14)(typescript@5.3.3))(typescript@5.3.3)(utf-8-validate@5.0.10))
@@ -1878,8 +1884,8 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(react@17.0.2))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(react@17.0.2))(react@17.0.2))(ink@3.2.0(react@17.0.2))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.1
+        version: link:../protocol-devtools
       '@layerzerolabs/test-devtools':
         specifier: ~0.2.6
         version: 0.2.7(@layerzerolabs/lz-definitions@2.3.25)(bs58@6.0.0)(fast-check@3.15.1)
@@ -1936,8 +1942,8 @@ importers:
         specifier: ~0.3.22
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(nr3y5kslgedgdr46bw37uyluz4)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -1948,17 +1954,17 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.0
+        version: link:../protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
-        version: 0.3.10(2qj6qwoblgbmgufuni7vllx4rm)
+        specifier: ~1.0.0
+        version: link:../protocol-devtools-evm
       '@layerzerolabs/test-devtools':
         specifier: ~0.2.7
         version: 0.2.7(@layerzerolabs/lz-definitions@2.3.25)(bs58@6.0.0)(fast-check@3.15.1)
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.23
-        version: 0.3.23(tr6f54haqjhferget7vn5ag3aq)
+        specifier: ~1.0.0
+        version: link:../ua-devtools
       '@swc/core':
         specifier: ^1.4.0
         version: 1.4.0(@swc/helpers@0.5.12)
@@ -2015,11 +2021,11 @@ importers:
         specifier: ~0.3.17
         version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
-        version: 0.3.15(nr3y5kslgedgdr46bw37uyluz4)
+        specifier: ~0.4.0
+        version: link:../devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.21
-        version: 0.3.26(rs3ptghg4pad7gqnzgla3qxwoq)
+        specifier: ~1.0.0
+        version: link:../devtools-evm-hardhat
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -2033,17 +2039,17 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.0
+        version: link:../protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
-        version: 0.3.10(2qj6qwoblgbmgufuni7vllx4rm)
+        specifier: ~1.0.0
+        version: link:../protocol-devtools-evm
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.18
-        version: 0.3.23(tr6f54haqjhferget7vn5ag3aq)
+        specifier: ~1.0.0
+        version: link:../ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.14
-        version: 0.3.18(s25yccswd3q6cx6v3flrd7rsku)
+        specifier: ~1.0.0
+        version: link:../ua-devtools-evm
       '@swc/core':
         specifier: ^1.4.0
         version: 1.4.0(@swc/helpers@0.5.12)
@@ -2097,11 +2103,11 @@ importers:
         version: 4.0.4
     devDependencies:
       '@layerzerolabs/devtools':
-        specifier: ~0.3.22
-        version: 0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.3.23
+        version: link:../devtools
       '@layerzerolabs/devtools-solana':
-        specifier: ~0.0.4
-        version: 0.0.6(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(@solana/web3.js@1.95.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(fp-ts@2.16.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+        specifier: ~0.1.2
+        version: link:../devtools-solana
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
         version: 0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4)
@@ -2115,11 +2121,11 @@ importers:
         specifier: ^2.3.25
         version: 2.3.31
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
-        version: 0.3.9(@layerzerolabs/devtools@0.3.23(@ethersproject/bytes@5.7.0)(@layerzerolabs/io-devtools@0.1.11(ink-gradient@2.0.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink-table@3.1.0(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2))(ink@3.2.0(bufferutil@4.0.8)(react@17.0.2)(utf-8-validate@5.0.10))(react@17.0.2)(yoga-layout-prebuilt@1.10.0)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4))(@layerzerolabs/lz-definitions@2.3.25)(zod@3.22.4)
+        specifier: ~0.4.0
+        version: link:../protocol-devtools
       '@layerzerolabs/protocol-devtools-solana':
-        specifier: ~0.0.3
-        version: 0.0.4(6ouh23qfcdidwe74yrbt4ivczu)
+        specifier: ~1.0.3
+        version: link:../protocol-devtools-solana
       '@layerzerolabs/test-devtools':
         specifier: ~0.2.6
         version: 0.2.7(@layerzerolabs/lz-definitions@2.3.25)(bs58@6.0.0)(fast-check@3.15.1)
@@ -2127,8 +2133,8 @@ importers:
         specifier: ~0.0.1
         version: 0.0.2(@solana/web3.js@1.95.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))(fast-check@3.15.1)
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.23
-        version: 0.3.23(szycc3hhdkfcnwtiaujkmv2hi4)
+        specifier: ~1.0.2
+        version: link:../ua-devtools
       '@solana/web3.js':
         specifier: ~1.95.0
         version: 1.95.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -2250,10 +2256,10 @@ importers:
         specifier: ~0.0.3
         version: link:../../packages/devtools-cli
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
+        specifier: ~0.4.0
         version: link:../../packages/devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.26
+        specifier: ~1.0.0
         version: link:../../packages/devtools-evm-hardhat
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
@@ -2280,34 +2286,34 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/omnicounter-devtools':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools
       '@layerzerolabs/omnicounter-devtools-evm':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools-evm
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
+        specifier: ~0.4.0
         version: link:../../packages/protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
+        specifier: ~1.0.0
         version: link:../../packages/protocol-devtools-evm
       '@layerzerolabs/test-devtools-evm-hardhat':
         specifier: ~0.2.5
         version: link:../../packages/test-devtools-evm-hardhat
       '@layerzerolabs/test-setup-devtools-evm-hardhat':
-        specifier: ~0.0.6
+        specifier: ~1.0.0
         version: link:../test-setup-devtools-evm-hardhat
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.22
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.17
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm
       '@layerzerolabs/ua-devtools-evm-hardhat':
-        specifier: ~0.3.19
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -2388,10 +2394,10 @@ importers:
         specifier: ~0.3.17
         version: link:../../packages/devtools
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
+        specifier: ~0.4.0
         version: link:../../packages/devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.21
+        specifier: ~1.0.0
         version: link:../../packages/devtools-evm-hardhat
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
@@ -2418,16 +2424,16 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/omnicounter-devtools':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools
       '@layerzerolabs/omnicounter-devtools-evm':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools-evm
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
+        specifier: ~0.4.0
         version: link:../../packages/protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
+        specifier: ~1.0.0
         version: link:../../packages/protocol-devtools-evm
       '@layerzerolabs/test-devtools':
         specifier: ~0.2.6
@@ -2436,10 +2442,10 @@ importers:
         specifier: ~0.2.5
         version: link:../../packages/test-devtools-evm-hardhat
       '@layerzerolabs/test-setup-devtools-evm-hardhat':
-        specifier: ~0.0.6
+        specifier: ~1.0.0
         version: link:../test-setup-devtools-evm-hardhat
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -2511,7 +2517,7 @@ importers:
         specifier: ~0.3.17
         version: link:../../packages/devtools
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
+        specifier: ~0.4.0
         version: link:../../packages/devtools-evm
       '@layerzerolabs/lz-definitions':
         specifier: ^2.3.25
@@ -2565,10 +2571,10 @@ importers:
         specifier: ~0.1.11
         version: link:../../packages/io-devtools
       '@layerzerolabs/test-setup-devtools-evm-hardhat':
-        specifier: ~0.0.6
+        specifier: ~1.0.0
         version: link:../test-setup-devtools-evm-hardhat
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -2643,25 +2649,28 @@ importers:
         specifier: ~0.3.17
         version: link:../../packages/devtools
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
+        specifier: ~0.4.0
         version: link:../../packages/devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.21
+        specifier: ~1.0.0
         version: link:../../packages/devtools-evm-hardhat
+      '@layerzerolabs/io-devtools':
+        specifier: ~0.1.11
+        version: link:../../packages/io-devtools
       '@layerzerolabs/lz-definitions':
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
+        specifier: ~0.4.0
         version: link:../../packages/protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
+        specifier: ~1.0.0
         version: link:../../packages/protocol-devtools-evm
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.18
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.14
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm
       '@types/jest':
         specifier: ^29.5.12
@@ -2718,10 +2727,10 @@ importers:
         specifier: ~0.3.21
         version: link:../../packages/devtools
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
+        specifier: ~0.4.0
         version: link:../../packages/devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.21
+        specifier: ~1.0.0
         version: link:../../packages/devtools-evm-hardhat
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
@@ -2748,34 +2757,34 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/omnicounter-devtools':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools
       '@layerzerolabs/omnicounter-devtools-evm':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools-evm
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
+        specifier: ~0.4.0
         version: link:../../packages/protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
+        specifier: ~1.0.0
         version: link:../../packages/protocol-devtools-evm
       '@layerzerolabs/test-devtools-evm-hardhat':
         specifier: ~0.2.5
         version: link:../../packages/test-devtools-evm-hardhat
       '@layerzerolabs/test-setup-devtools-evm-hardhat':
-        specifier: ~0.0.6
+        specifier: ~1.0.0
         version: link:../test-setup-devtools-evm-hardhat
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.22
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.17
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm
       '@layerzerolabs/ua-devtools-evm-hardhat':
-        specifier: ~0.3.19
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5
@@ -2856,10 +2865,10 @@ importers:
         specifier: ~0.3.17
         version: link:../../packages/devtools
       '@layerzerolabs/devtools-evm':
-        specifier: ~0.3.13
+        specifier: ~0.4.0
         version: link:../../packages/devtools-evm
       '@layerzerolabs/devtools-evm-hardhat':
-        specifier: ~0.3.21
+        specifier: ~1.0.0
         version: link:../../packages/devtools-evm-hardhat
       '@layerzerolabs/io-devtools':
         specifier: ~0.1.11
@@ -2892,34 +2901,34 @@ importers:
         specifier: ^2.3.25
         version: 2.3.25
       '@layerzerolabs/omnicounter-devtools':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools
       '@layerzerolabs/omnicounter-devtools-evm':
-        specifier: ~0.3.7
+        specifier: ~1.0.0
         version: link:../../packages/omnicounter-devtools-evm
       '@layerzerolabs/protocol-devtools':
-        specifier: ~0.3.9
+        specifier: ~0.4.0
         version: link:../../packages/protocol-devtools
       '@layerzerolabs/protocol-devtools-evm':
-        specifier: ~0.3.10
+        specifier: ~1.0.0
         version: link:../../packages/protocol-devtools-evm
       '@layerzerolabs/test-devtools-evm-hardhat':
         specifier: ~0.2.5
         version: link:../../packages/test-devtools-evm-hardhat
       '@layerzerolabs/test-setup-devtools-evm-hardhat':
-        specifier: ~0.0.6
+        specifier: ~1.0.0
         version: link:../test-setup-devtools-evm-hardhat
       '@layerzerolabs/toolbox-hardhat':
-        specifier: ~0.2.35
+        specifier: ~0.3.0
         version: link:../../packages/toolbox-hardhat
       '@layerzerolabs/ua-devtools':
-        specifier: ~0.3.22
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools
       '@layerzerolabs/ua-devtools-evm':
-        specifier: ~0.3.17
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm
       '@layerzerolabs/ua-devtools-evm-hardhat':
-        specifier: ~0.3.19
+        specifier: ~1.0.0
         version: link:../../packages/ua-devtools-evm-hardhat
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.5

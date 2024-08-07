@@ -3,6 +3,7 @@ import type {
     OmniSigner,
     OmniSignerFactory,
     OmniTransaction,
+    OmniTransactionReceipt,
     OmniTransactionResponse,
     OmniTransactionWithError,
     OmniTransactionWithReceipt,
@@ -12,12 +13,22 @@ import { formatEid, formatOmniPoint } from '@/omnigraph/format'
 import { groupTransactionsByEid } from './utils'
 import { EndpointId } from '@layerzerolabs/lz-definitions'
 import assert from 'assert'
+import type { OmniPoint } from '@/omnigraph'
 
 /**
  * Base class for all signers containing common functionality
  */
 export abstract class OmniSignerBase implements OmniSigner {
-    protected constructor(public readonly eid: EndpointId) {}
+    /**
+     * @deprecated Use `OmniSigner.getPoint()` instead
+     */
+    public readonly eid: EndpointId
+
+    protected constructor(eid: EndpointId) {
+        this.eid = eid
+    }
+
+    abstract getPoint(): OmniPoint | Promise<OmniPoint>
 
     abstract sign(transaction: OmniTransaction): Promise<string>
 
@@ -127,7 +138,18 @@ export const createSignAndSend =
                 )
 
                 logger.debug(`Creating signer for ${eidName}`)
-                const signer = await createSigner(eid)
+                let signer: OmniSigner<OmniTransactionResponse<OmniTransactionReceipt>>
+
+                try {
+                    signer = await createSigner(eid)
+                } catch (error) {
+                    logger.error(`Failed to create a signer for ${eidName}: ${error}`)
+
+                    return handleError({
+                        error: new Error(`Failed to create a signer for ${eidName}: ${error}`),
+                        transaction: eidTransactions[0]!,
+                    })
+                }
 
                 await signerLogic(eid, logger, signer, eidTransactions, handleSuccess, handleError)
 

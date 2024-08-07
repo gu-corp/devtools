@@ -1,5 +1,20 @@
 # @layerzerolabs/devtools-evm
 
+## 0.4.0
+
+### Minor Changes
+
+- 1f18418: Allow EndpointV2.setConfig to return more than one transaction
+
+## 0.3.15
+
+### Patch Changes
+
+- 753a9aa: Add getPoint method to OmniSigner
+- Updated dependencies [753a9aa]
+- Updated dependencies [f22da2e]
+  - @layerzerolabs/devtools@0.3.23
+
 ## 0.3.14
 
 ### Patch Changes

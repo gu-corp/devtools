@@ -1,5 +1,40 @@
 # @layerzerolabs/toolbox-hardhat
 
+## 0.3.2
+
+### Patch Changes
+
+- 7653e00: Update log levels in OApp configuration
+- Updated dependencies [7653e00]
+  - @layerzerolabs/ua-devtools@1.0.2
+
+## 0.3.1
+
+### Patch Changes
+
+- 10dcf5b: Add ULN302 config type to EndpointV2 & ULN302 interfaces
+- Updated dependencies [10dcf5b]
+  - @layerzerolabs/protocol-devtools-evm@1.0.1
+  - @layerzerolabs/protocol-devtools@0.4.1
+  - @layerzerolabs/ua-devtools@1.0.1
+
+## 0.3.0
+
+### Minor Changes
+
+- 1f18418: Allow EndpointV2.setConfig to return more than one transaction
+
+### Patch Changes
+
+- Updated dependencies [1f18418]
+  - @layerzerolabs/protocol-devtools-evm@1.0.0
+  - @layerzerolabs/protocol-devtools@0.4.0
+  - @layerzerolabs/ua-devtools@1.0.0
+  - @layerzerolabs/devtools-evm@0.4.0
+  - @layerzerolabs/devtools-evm-hardhat@1.0.0
+  - @layerzerolabs/ua-devtools-evm@1.0.0
+  - @layerzerolabs/ua-devtools-evm-hardhat@1.0.0
+
 ## 0.2.41
 
 ### Patch Changes

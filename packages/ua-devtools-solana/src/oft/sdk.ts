@@ -14,9 +14,8 @@ import {
     toHex,
 } from '@layerzerolabs/devtools'
 import type { EndpointId } from '@layerzerolabs/lz-definitions'
-import type { IEndpointV2 } from '@layerzerolabs/protocol-devtools'
 import { EndpointV2 } from '@layerzerolabs/protocol-devtools-solana'
-import { Logger, printJson } from '@layerzerolabs/io-devtools'
+import { type Logger, printBoolean, printJson } from '@layerzerolabs/io-devtools'
 import { mapError, AsyncRetriable } from '@layerzerolabs/devtools'
 import { OmniSDK } from '@layerzerolabs/devtools-solana'
 import { Connection, PublicKey, Transaction } from '@solana/web3.js'
@@ -34,20 +33,53 @@ export class OFT extends OmniSDK implements IOApp {
         super(connection, point, userAccount, logger)
     }
 
-    getOwner(): Promise<OmniAddress | undefined> {
-        throw new Error('Method not implemented.')
+    @AsyncRetriable()
+    async getOwner(): Promise<OmniAddress | undefined> {
+        this.logger.debug(`Getting owner`)
+
+        const config = await mapError(
+            () => OftProgram.accounts.OftConfig.fromAccountAddress(this.connection, this.publicKey),
+            (error) => new Error(`Failed to get owner for ${this.label}: ${error}`)
+        )
+
+        const owner = config.admin.toBase58()
+
+        return this.logger.debug(`Got owner: ${owner}`), owner
     }
 
-    hasOwner(): Promise<boolean> {
-        throw new Error('Method not implemented.')
+    async hasOwner(address: OmniAddress): Promise<boolean> {
+        this.logger.debug(`Checking whether ${address} is an owner`)
+
+        const owner = await this.getOwner()
+        const isOwner = areBytes32Equal(normalizePeer(address, this.point.eid), normalizePeer(owner, this.point.eid))
+
+        return this.logger.debug(`Checked whether ${address} is an owner (${owner}): ${printBoolean(isOwner)}`), isOwner
     }
 
-    setOwner(): Promise<OmniTransaction> {
-        throw new Error('Method not implemented.')
+    async setOwner(address: OmniAddress): Promise<OmniTransaction> {
+        this.logger.debug(`Setting owner to ${address}`)
+
+        const transaction = await mapError(
+            async () =>
+                new Transaction().add(
+                    await OftTools.createTransferAdminIx(
+                        this.userAccount,
+                        this.publicKey,
+                        new PublicKey(address),
+                        this.programId
+                    )
+                ),
+            (error) => new Error(`Failed to set owner for ${this.label} to ${address}: ${error}`)
+        )
+
+        return {
+            ...(await this.createTransaction(transaction)),
+            description: `Setting owner to ${address}`,
+        }
     }
 
     @AsyncRetriable()
-    async getEndpointSDK(): Promise<IEndpointV2> {
+    async getEndpointSDK(): Promise<EndpointV2> {
         this.logger.debug(`Getting EndpointV2 SDK`)
 
         return new EndpointV2(
@@ -110,20 +142,42 @@ export class OFT extends OmniSDK implements IOApp {
     async getDelegate(): Promise<OmniAddress | undefined> {
         this.logger.debug(`Getting delegate`)
 
-        throw new TypeError(`getDelegate() not implemented on Solana OFT SDK`)
+        const endpointSdk = await this.getEndpointSDK()
+        const delegate = await endpointSdk.getDelegate(this.point.address)
+
+        return this.logger.verbose(`Got delegate: ${delegate}`), delegate
     }
 
     @AsyncRetriable()
     async isDelegate(delegate: OmniAddress): Promise<boolean> {
         this.logger.debug(`Checking whether ${delegate} is a delegate`)
 
-        throw new TypeError(`isDelegate() not implemented on Solana OFT SDK`)
+        const endpointSdk = await this.getEndpointSDK()
+        const isDelegate = await endpointSdk.isDelegate(this.point.address, delegate)
+
+        return this.logger.verbose(`Checked delegate: ${delegate}: ${printBoolean(isDelegate)}`), isDelegate
     }
 
     async setDelegate(delegate: OmniAddress): Promise<OmniTransaction> {
         this.logger.debug(`Setting delegate to ${delegate}`)
 
-        throw new TypeError(`setDelegate() not implemented on Solana OFT SDK`)
+        const transaction = await mapError(
+            async () => {
+                const instruction = await OftTools.createSetDelegateIx(
+                    this.userAccount,
+                    this.publicKey,
+                    new PublicKey(delegate),
+                    this.programId
+                )
+                return new Transaction().add(instruction)
+            },
+            (error) => new Error(`Failed to set delegate for ${this.label} to ${delegate}: ${error}`)
+        )
+
+        return {
+            ...(await this.createTransaction(transaction)),
+            description: `Setting delegate to ${delegate}`,
+        }
     }
 
     @AsyncRetriable()
@@ -177,6 +231,34 @@ export class OFT extends OmniSDK implements IOApp {
             ...(await this.createTransaction(transaction)),
             description: `Setting enforced options to ${printJson(enforcedOptions)}`,
         }
+    }
+
+    async initializeNonce(eid: EndpointId, peer: OmniAddress): Promise<[OmniTransaction] | []> {
+        this.logger.verbose(`Initializing OApp nonce for peer ${peer} on ${formatEid(eid)}`)
+
+        const endpointSdk = await this.getEndpointSDK()
+        return endpointSdk.initializeOAppNonce(this.point.address, eid, peer)
+    }
+
+    async initializeSendLibrary(eid: EndpointId): Promise<[OmniTransaction] | []> {
+        this.logger.verbose(`Initializing send library on ${formatEid(eid)}`)
+
+        const endpointSdk = await this.getEndpointSDK()
+        return endpointSdk.initializeSendLibrary(this.point.address, eid)
+    }
+
+    async initializeReceiveLibrary(eid: EndpointId): Promise<[OmniTransaction] | []> {
+        this.logger.verbose(`Initializing receive library on ${formatEid(eid)}`)
+
+        const endpointSdk = await this.getEndpointSDK()
+        return endpointSdk.initializeReceiveLibrary(this.point.address, eid)
+    }
+
+    async initializeOAppConfig(eid: EndpointId, lib: OmniAddress | null | undefined): Promise<[OmniTransaction] | []> {
+        this.logger.verbose(`Initializing OApp config for library ${lib} on ${formatEid(eid)}`)
+
+        const endpointSdk = await this.getEndpointSDK()
+        return endpointSdk.initializeOAppConfig(this.point.address, eid, lib ?? undefined)
     }
 
     /**
