@@ -1,6 +1,6 @@
 import pMemoize from 'p-memoize'
 import { formatEid, type EndpointBasedFactory, type OmniSignerFactory } from '@layerzerolabs/devtools'
-import { GnosisOmniSignerEVM, OmniSignerEVM } from '@layerzerolabs/devtools-evm'
+import { GnosisOmniSignerEVM, OmniSignerEVM, AwsKmsOmniSignerEVM } from '@layerzerolabs/devtools-evm'
 import { createProviderFactory } from '@/provider'
 import { createGetHreByEid } from '@/runtime'
 import { ConnectSafeConfigWithSafeAddress } from '@safe-global/protocol-kit'
@@ -39,6 +39,28 @@ export const createGnosisSignerFactory = (
             throw new Error('No safe config found for the current network')
         }
         return new GnosisOmniSignerEVM<ConnectSafeConfigWithSafeAddress>(eid, signer, safeConfig.safeUrl, safeConfig)
+    })
+}
+
+export const createAwsKmsSignerFactory = (
+    definition?: SignerDefinition,
+    networkEnvironmentFactory = createGetHreByEid(),
+    providerFactory = createProviderFactory(networkEnvironmentFactory),
+    signerAddressorIndexFactory = createSignerAddressOrIndexFactory(definition, networkEnvironmentFactory)
+): OmniSignerFactory<OmniSignerEVM> => {
+    return pMemoize(async (eid) => {
+        const provider = await providerFactory(eid)
+        const addressOrIndex = await signerAddressorIndexFactory(eid)
+        const signer = provider.getSigner(addressOrIndex)
+
+        const env = await networkEnvironmentFactory(eid)
+        const awsKmsConfig = env.network.config.awsKmsConfig
+
+        if (!awsKmsConfig) {
+            throw new Error('No AWS KMS config found for the current network')
+        }
+
+        return new AwsKmsOmniSignerEVM(eid, signer, awsKmsConfig)
     })
 }
 

@@ -14,6 +14,8 @@ import {
 import assert from 'assert'
 
 import { ethers } from 'ethers'
+import { EthersV5AwsKmsSigner } from '@gu-corp/ethers-v5-aws-kms-signer'
+import { EthersV5AwsKmsSignerConfig } from '@gu-corp/ethers-v5-aws-kms-signer/dist/src/aws-kms-signer-v5'
 
 export abstract class OmniSignerEVMBase extends OmniSignerBase implements OmniSigner {
     protected constructor(
@@ -150,6 +152,45 @@ export class GnosisOmniSignerEVM<TSafeConfig extends ConnectSafeConfig> extends 
             data: transaction.data,
             value: String(transaction.value ?? 0),
             operation: OperationType.Call,
+        }
+    }
+}
+
+export class AwsKmsOmniSignerEVM extends OmniSignerEVMBase {
+    constructor(
+        eid: EndpointId,
+        signer: Signer,
+        protected readonly awsKmsConfig: EthersV5AwsKmsSignerConfig,
+        protected readonly awsKmsSigner = new EthersV5AwsKmsSigner(awsKmsConfig).connect(signer.provider || null)
+    ) {
+        super(eid, signer)
+    }
+
+    async sign(_: OmniTransaction): Promise<string> {
+        throw new Error(`Signing transactions with AWS KMS signer is currently not supported, use signAndSend instead`)
+    }
+
+    async signAndSend(transaction: OmniTransaction): Promise<OmniTransactionResponse<TransactionReceipt>> {
+        this.assertTransaction(transaction)
+
+        const nativeTransaction = this.#serializeTransaction(transaction)
+        const { hash, ...response } = await this.awsKmsSigner.sendTransaction(nativeTransaction)
+
+        return {
+            ...response,
+            transactionHash: hash,
+        }
+    }
+
+    #serializeTransaction(transaction: OmniTransaction): TransactionRequest {
+        return {
+            // mandatory
+            to: transaction.point.address,
+            data: transaction.data,
+
+            // optional
+            ...(transaction.gasLimit != null && { gasLimit: transaction.gasLimit }),
+            ...(transaction.value != null && { value: transaction.value }),
         }
     }
 }
